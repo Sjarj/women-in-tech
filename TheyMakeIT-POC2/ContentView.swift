@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  TheyMakeIt-POC1
+//  TheyMakeIt-POC2
 //
-//  Created by Amandine Cousin on 23/04/2024.
+//  Created by Amandine Cousin on 24/04/2024.
 //
 
 import SwiftUI
@@ -18,36 +18,52 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: geometry.size.width)
                 
-                VStack {
-                    Text(femme.nom)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    HStack {
-                        Text(femme.anneeNaissance)
-                        Text("-")
-                        Text(femme.anneeDeces)
-                    }
-                    .font(.headline)
-                    .foregroundStyle(.darkGrey)
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 10)
-                    .stroke(.purple, lineWidth: 2))
+                Text(femme.nom)
+                    .font(.system(size: 38))
+                    .fontWeight(.heavy)
+                    .foregroundStyle(.purple)
                 
-                VStack {
-                    HStack {
+                HStack {
+                    VStack {
+                        Image(systemName: "calendar")
+                            .padding(.bottom, 4)
+                        Text(femme.anneeNaissance)
+                            .font(.callout)
+                        Text("-")
+                            .font(.callout)
+                        Text(femme.anneeDeces)
+                            .font(.callout)
+                    }
+                    .frame(width: geometry.size.width/4, height: 100)
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .stroke(.purple, lineWidth: 2))
+                    
+                    VStack {
+                        Image(systemName: "bookmark")
+                            .padding(.bottom, 4)
                         ForEach(femme.metiers, id: \.self) { metier in
                             Text(metier)
+                                .font(.callout)
                         }
                     }
-                    .font(.title3)
+                    .frame(width: geometry.size.width/3, height: 100)
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .stroke(.purple, lineWidth: 2))
                     
-                    HStack {
+                    VStack {
+                        Image(systemName: "mappin.and.ellipse")
+                            .padding(.bottom, 4)
                         ForEach(femme.nationalites, id: \.self) { nationalite in
                             Text(nationalite)
+                                .font(.callout)
                         }
                     }
-                    .foregroundStyle(.darkGrey)
+                    .frame(width: geometry.size.width/4, height: 100)
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .stroke(.purple, lineWidth: 2))
                 }
                 
                 VStack {
