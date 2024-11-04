@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListingView: View {
-    let listeFemmes: [Femme] = [
+  private  let listeFemmes: [Femme] = [
         Femme(nom: "Hedy Lamarr", metiers: ["Actrice", "Inventrice"], nomImage: "Hedy", anneeNaissance: "1914", anneeDeces: "2000", nationalites: ["Autrichienne", "Américaine"], reussites: ["Télécommunications", "Ingénierie aéronautique"], description: "Hedy Lamarr était une actrice autrichienne qui a également été une inventrice prolifique. Elle est surtout connue pour son invention avec George Antheil, du système de saut de fréquence, une technologie fondamentale pour les communications sans fil modernes."),
         Femme(nom: "Grace Hopper", metiers: ["Informaticienne", "Militaire"], nomImage: "Grace", anneeNaissance: "1906", anneeDeces: "1992", nationalites: ["Américaine"], reussites: ["COBOL", "Premier compilateur"], description: "Grace Hopper était une pionnière de l'informatique, connue pour son travail sur le langage de programmation COBOL et pour avoir popularisé le concept de débogage informatique. Elle a joué un rôle majeur dans le développement des premiers ordinateurs, notamment le Mark I. Elle est la conceptrice du premier compilateur en 1951."),
         Femme(nom: "Audrey Tang", metiers: ["Programmeuse", "Activiste"], nomImage: "Audrey", anneeNaissance: "1981", nationalites: ["Taïwanaise"], reussites: ["Développement open-source", "Perl et Haskell"], description: "Audrey Tang, une programmeuse et activiste taïwanaise, est réputée pour son expertise en technologie et son engagement en faveur de la démocratie participative et de la gouvernance transparente à travers l'utilisation innovante de logiciels open-source et de plateformes numériques."),
@@ -21,22 +21,29 @@ struct ListingView: View {
     
     var body: some View {
         NavigationSplitView{
-            List(listeFemmes, id: \.nom){ femme in
+              List(listeFemmes, id: \.nom){ femme in
                 NavigationLink {
                     ContentView(femme: femme)
                 } label: {
-                    HStack {
-                        Image(femme.nomImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 70, height: 70)
-                            .clipShape(Circle())
-                        Text(femme.nom)
-                    }
+                    CellView(femme: femme)
                 }
             }
         } detail: {
             Text("Sélectionnez une femme de la liste pour en savoir plus")
+        }
+    }
+}
+
+struct CellView: View {
+    let femme: Femme
+    var body: some View {
+        HStack {
+            Image(femme.nomImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 70, height: 70)
+                .clipShape(Circle())
+            Text(femme.nom)
         }
     }
 }
